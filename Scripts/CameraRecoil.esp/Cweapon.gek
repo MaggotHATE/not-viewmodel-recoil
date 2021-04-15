@@ -1,0 +1,185 @@
+scn Cweapon
+
+ref rC_Weapon
+
+int VMR
+ref VMweapon
+
+float cX
+float cY
+float cZ
+float cXmin
+float cYmin
+float cISlimitMultX
+float cISlimitMultY
+float cXlimitsMult
+float cYlimitsMult
+float cXmax
+float cYmax
+
+float cXmult
+float cYmult
+
+
+float cXresult
+float cYresult
+float cZresult
+
+float rndz
+float randn
+float cIsRand
+float cConst
+
+int ShouldReturn
+
+begin Function {rC_Weapon}
+
+	; let VMR := GetModIndex "VM_recoil.esp"
+	; let VMweapon := BuildRef VMR 2050
+	; print "Name = "+$GetEditorID VMweapon
+	; let cX := GetVariable "DefX" VMweapon 
+	; I still have no idea how Get|SetVariable work, commented for now
+	
+	;print "DefX = "+$cX
+	
+	let cConst := 2 - GetWeaponIsAutomatic rC_Weapon
+	
+	let cXmult := GetINIFloat "General:cVerticalMult" "C_Recoil.ini"
+	let cYmult := GetINIFloat "General:cHorizontalMult" "C_Recoil.ini"
+	
+	let cXlimitsMult := GetINIFloat "General:cXlimitsMult" "C_Recoil.ini"
+	let cYlimitsMult := GetINIFloat "General:cYlimitsMult" "C_Recoil.ini"
+	
+	let cX := VisuaModellRecoilQuest.DefA1 ;GetVariable "DefY", VMweapon
+	let cY := VisuaModellRecoilQuest.DefA0 ;GetVariable "DefX", VMweapon
+	;let cZ := VisuaModellRecoilQuest.DefA2 ;GetVariable "DefX", VMweapon
+	; print "cX="+$cX
+	; print "cY="+$cY
+	
+	if cX != 0 && cY != 0
+		let ActualModellRecoilQuest.inc += 0.05
+		let ActualModellRecoilQuest.inctime := 0.6
+	endif
+	
+	; so the first viewmodel rotation may be too light, so let's make sure it it at least something
+	if cX < 0.001
+		let cX *= cConst*cConst
+	endif
+	
+	if abs cY < 0.001
+		let cY *= cConst*cConst
+	endif
+	
+	let cXmin := GetINIFloat "General:vVerticalLowerLimit" "VM_Recoil.ini"
+	let cYmin := GetINIFloat "General:vHorizontalLowerLimit" "VM_Recoil.ini"
+	let cXmax := GetINIFloat "General:vVerticalUpperLimit" "VM_Recoil.ini"
+	let cYmax := GetINIFloat "General:vHorizontalUpperLimit" "VM_Recoil.ini"
+	
+	
+	let cX *= cXmult
+	let cY *= cYmult
+	let cYmin *= cYlimitsMult
+	let cXmin *= cXlimitsMult
+	let cYmax *= cYlimitsMult
+	let cXmax *= cXlimitsMult
+	
+	; print "cXmin="+$cXmin
+	; print "cYmin="+$cYmin
+	; print "cXmax="+$cXmax
+	; print "cYmax="+$cYmax
+	
+	
+	if GetPCUsingIronSights
+		let cISlimitMultX := GetINIFloat "Ironsights:cVerticalIronsightMult" "C_Recoil.ini"
+		let cISlimitMultY := GetINIFloat "Ironsights:cHorizontalIronsightMult" "C_Recoil.ini"
+		let cX *= cISlimitMultX
+		let cY *= cISlimitMultY
+		let cYmin *= cISlimitMultY
+		let cXmin *= cISlimitMultX
+		let cYmax *= cISlimitMultY
+		let cXmax *= cISlimitMultX
+	endif
+
+	; print "cX1="+$cX
+	; print "cY1="+$cY
+	
+	if cY < 0
+		let randn := -1
+	else 
+		let randn := 1
+	endif
+		
+	if (abs cY) < cYmin
+		let cY := cYmin * randn
+	endif
+	
+	if cX < cXmin
+		let cX := cXmin
+	endif
+	
+	if (abs cY) > cYmax
+		let cY := cYmax * randn
+	endif
+	
+	if cX > cXmax
+		let cX := cXmax
+	endif
+	
+	; print "cX 2 "+$cX
+	; print "cY 2 "+$cY
+	
+	let cIsRand := GetINIFloat "Randomization:cIsRandomized" "C_Recoil.ini"
+	if cIsRand == 1
+		let randn := getrandompercent
+		if randn > 50
+			let randn := 1
+		else
+			let randn := -1
+		endif
+	else
+		let randn := 1
+	endif
+	
+	;print "cConst=" + $cConst
+	let cXresult := (player.getangle x) + cX
+	let cYresult := (player.getangle z) + cY
+	;let cZresult := (player.getangle y) + cZ
+	
+	
+	; print "cX result "+$cXresult
+	; print "cY result "+$cYresult
+	; print "cZ result "+$cZresult
+	
+	let ShouldReturn := GetINIFloat "General:cShouldReturn" "C_Recoil.ini"
+	
+	player.setangle x cXresult
+	player.setangle z cYresult
+	;player.setangle y cZresult
+	
+	;print $player.getangle y
+	
+	if GetWeaponType rC_Weapon == 3 || GetWeaponType rC_Weapon == 4
+		let randn := (GetWeight rC_Weapon) * 3 - 10
+	else
+		let randn := (GetWeight rC_Weapon) * 6 - 10
+	endif
+
+	if randn > 45
+		let randn := 45
+	endif
+	
+	let ActualModellRecoilQuest.recanglex += (cos randn) * cX
+	let ActualModellRecoilQuest.timex := 0.09
+	let ActualModellRecoilQuest.timer := 0
+	let ActualModellRecoilQuest.ShouldReturn := ShouldReturn
+
+	if cIsRand == 1
+		if getrandompercent > 50
+			let ActualModellRecoilQuest.recanglez += (sin randn) * cY
+		else
+			let ActualModellRecoilQuest.recanglez -= (sin randn) * cY
+		endif
+	endif
+	let ActualModellRecoilQuest.timez := 0.09
+
+end

@@ -1,0 +1,397 @@
+scn CRMCM
+
+string_var ScVerticalMult
+string_var ScHorizontalMult
+string_var ScXlimitsMult
+string_var ScYlimitsMult
+string_var ScShouldReturn
+string_var ScVerticalIronsightMult
+string_var ScHorizontalIronsightMult
+string_var ScIsRandomized
+string_var ScDebug
+
+string_var SvLoadPreset
+string_var SvSavePreset
+
+string_var cVerticalMultQ
+string_var cHorizontalMultQ
+string_var cXlimitsMultQ
+string_var cYlimitsMultQ
+string_var cShouldReturnQ
+string_var cVerticalIronsightMultQ
+string_var cHorizontalIronsightMultQ
+string_var cIsRandomizedQ
+string_var cDebugQ
+
+string_var vLoadPresetQ
+string_var vSavePresetQ
+
+float cVerticalMultD
+float cHorizontalMultD
+float cXlimitsMultD
+float cYlimitsMultD
+float cShouldReturnD
+float cVerticalIronsightMultD
+float cHorizontalIronsightMultD
+float cIsRandomizedD
+float cDebugD
+
+int Fin
+int MCMid
+int OptionID
+float OptionValue
+int IsHover
+
+array_var PresetsList
+array_var PresetValuesList
+array_var PresetVal
+string_var CustomPath
+string_var PresetName
+string_var PresetPath
+string_var PresetsButtons
+
+float cVerticalMult
+float cHorizontalMult
+float cXlimitsMult
+float cYlimitsMult
+float cShouldReturn
+float cVerticalIronsightMult
+float cHorizontalIronsightMult
+float cIsRandomized
+float cDebug
+
+
+ref MCMlist
+int vUpdatedINI
+
+
+
+begin gamemode
+
+	if getgameloaded
+		
+		if FileExists "Config\C_Recoil.ini"
+		
+			set cVerticalMult to GetINIFloat "General:cVerticalMult" "C_Recoil.ini"
+			set cHorizontalMult to GetINIFloat "General:cHorizontalMult" "C_Recoil.ini"
+			set cXlimitsMult to GetINIFloat "General:cXlimitsMult" "C_Recoil.ini"
+			set cYlimitsMult to GetINIFloat "General:cYlimitsMult" "C_Recoil.ini"
+			set cShouldReturn to GetINIFloat "General:cShouldReturn" "C_Recoil.ini"
+			set cVerticalIronsightMult to GetINIFloat "Ironsights:cVerticalIronsightMult" "C_Recoil.ini"
+			set cHorizontalIronsightMult to GetINIFloat "Ironsights:cHorizontalIronsightMult" "C_Recoil.ini"
+			set cIsRandomized to GetINIFloat "Randomization:cIsRandomized" "C_Recoil.ini"
+			set cDebug to GetINIFloat "BUGFIXING:cDebug" "C_Recoil.ini"
+			
+		endif
+		
+		if FileExists "Config\ProfilesCRecoil\Default.ini"
+		
+			set cVerticalMultD to GetINIFloat "General:cVerticalMult" "ProfilesCRecoil\Default.ini"
+			set cHorizontalMultD to GetINIFloat "General:cHorizontalMult" "ProfilesCRecoil\Default.ini"
+			set cXlimitsMultD to GetINIFloat "General:cXlimitsMult" "ProfilesCRecoil\Default.ini"
+			set cYlimitsMultD to GetINIFloat "General:cYlimitsMult" "ProfilesCRecoil\Default.ini"
+			set cShouldReturnD to GetINIFloat "General:cShouldReturn" "ProfilesCRecoil\Default.ini"
+			set cVerticalIronsightMultD to GetINIFloat "Ironsights:cVerticalIronsightMult" "ProfilesCRecoil\Default.ini"
+			set cHorizontalIronsightMultD to GetINIFloat "Ironsights:cHorizontalIronsightMult" "ProfilesCRecoil\Default.ini"
+			set cIsRandomizedD to GetINIFloat "Randomization:cIsRandomized" "ProfilesCRecoil\Default.ini"
+			set cDebugD to GetINIFloat "BUGFIXING:cDebug" "ProfilesCRecoil\Default.ini"
+			
+		endif
+		
+		if FileExists "Config\ProfilesCRecoil\Translation.ini"
+		
+			set cVerticalMultQ to GetINIString "General:cVerticalMultQ" "ProfilesCRecoil\Translation.ini"
+			set cHorizontalMultQ to GetINIString "General:cHorizontalMultQ" "ProfilesCRecoil\Translation.ini"
+			set cXlimitsMultQ to GetINIString "General:cXlimitsMultQ" "ProfilesCRecoil\Translation.ini"
+			set cYlimitsMultQ to GetINIString "General:cYlimitsMultQ" "ProfilesCRecoil\Translation.ini"
+			set cShouldReturnQ to GetINIString "General:cShouldReturnQ" "ProfilesCRecoil\Translation.ini"
+			set cVerticalIronsightMultQ to GetINIString "Ironsights:cVerticalIronsightMultQ" "ProfilesCRecoil\Translation.ini"
+			set cHorizontalIronsightMultQ to GetINIString "Ironsights:cHorizontalIronsightMultQ" "ProfilesCRecoil\Translation.ini"
+			set cIsRandomizedQ to GetINIString "Randomization:cIsRandomizedQ" "ProfilesCRecoil\Translation.ini"
+			set cDebugQ to GetINIString "BUGFIXING:cDebugQ" "ProfilesCRecoil\Translation.ini"
+			set vLoadPresetQ to GetINIString "PRESETS:vLoadPresetQ" "ProfilesCRecoil\Translation.ini"
+			set vSavePresetQ to GetINIString "PRESETS:vSavePresetQ" "ProfilesCRecoil\Translation.ini"
+		
+			
+			set ScVerticalMult to GetINIString "General:ScVerticalMult" "ProfilesCRecoil\Translation.ini"
+			set ScHorizontalMult to GetINIString "General:ScHorizontalMult" "ProfilesCRecoil\Translation.ini"
+			set ScXlimitsMult to GetINIString "General:ScXlimitsMult" "ProfilesCRecoil\Translation.ini"
+			set ScYlimitsMult to GetINIString "General:ScYlimitsMult" "ProfilesCRecoil\Translation.ini"
+			set ScShouldReturn to GetINIString "General:ScShouldReturn" "ProfilesCRecoil\Translation.ini"
+			set ScVerticalIronsightMult to GetINIString "Ironsights:ScVerticalIronsightMult" "ProfilesCRecoil\Translation.ini"
+			set ScHorizontalIronsightMult to GetINIString "Ironsights:ScHorizontalIronsightMult" "ProfilesCRecoil\Translation.ini"
+			set ScIsRandomized to GetINIString "Randomization:ScIsRandomized" "ProfilesCRecoil\Translation.ini"
+			set ScDebug to GetINIString "BUGFIXING:ScDebug" "ProfilesCRecoil\Translation.ini"
+			set SvLoadPreset to GetINIString "PRESETS:vLoadPreset" "ProfilesCRecoil\Translation.ini"
+			set SvSavePreset to GetINIString "PRESETS:vSavePreset" "ProfilesCRecoil\Translation.ini"
+		
+
+			
+		endif
+		
+		let PresetsList := Ar_Construct "array"
+		let PresetValuesList := Ar_Construct "stringmap"
+		let CustomPath := "Config\ProfilesCRecoil\Custom\"
+		let PresetsList := GetFilesInFolder $CustomPath
+		let PresetName := PresetsList[0]
+		
+		; let PresetPath := "ProfilesCRecoil\Custom\"+$PresetName
+		; let PresetValuesList["vVerticalLowerLimitQ"] := vVerticalLowerLimitQ
+		; let PresetValuesList["vVATSfixQ"] := vVATSfixQ
+		; let PresetValuesList["vUseIndividualRecoilQ"] := vUseIndividualRecoilQ
+		; let PresetValuesList["vFirstShotRandomizationQ"] := vFirstShotRandomizationQ
+		; Print PresetsList[0]
+		; Print PresetsList[1]
+		; Print PresetName
+		
+		;SetINISection "Test" PresetValuesList $PresetName
+		;SetINIFloat "General:vVerticalUpperLimitQ" vVerticalIntensityD $PresetName
+	endif
+
+	
+	if getgamerestarted
+		if IsModLoaded "The Mod Configuration Menu.esp"
+			set MCMid to GetModIndex "The Mod Configuration Menu.esp"
+			set MCMlist to BuildRef MCMid 2790
+			ListAddForm MCMlist CMitemMCM	
+		endif
+	endif
+	
+	if vUpdatedINI
+		let vUpdatedINI := 0
+		SetINIFloat "General:cVerticalMult" cVerticalMult "C_Recoil.ini"
+		SetINIFloat "General:cHorizontalMult" cHorizontalMult "C_Recoil.ini"
+		SetINIFloat "General:cXlimitsMult" cXlimitsMult "C_Recoil.ini"
+		SetINIFloat "General:cYlimitsMult" cYlimitsMult "C_Recoil.ini"
+		SetINIFloat "General:cShouldReturn" cShouldReturn "C_Recoil.ini"
+		SetINIFloat "Ironsights:cVerticalIronsightMult" cVerticalIronsightMult "C_Recoil.ini"
+		SetINIFloat "Ironsights:cHorizontalIronsightMult" cHorizontalIronsightMult "C_Recoil.ini"
+		SetINIFloat "Randomization:cIsRandomized" cIsRandomized "C_Recoil.ini"
+		SetINIFloat "BUGFIXING:cDebug" cDebug "C_Recoil.ini"
+
+	endif
+	
+	
+end
+
+Begin MenuMode 1013 ;an attempt to fix VATS-related bug, couldn't reproduce it though
+	if IsModLoaded "The Mod Configuration Menu.esp"
+	else
+		Return
+	endif
+	
+	if GetUIFloat "StartMenu/MCM/_ActiveMod" == GetModIndex "CameraRecoil.esp"
+		let OptionID := GetUIFloat "StartMenu/MCM/_ActiveOption"
+		let OptionValue := GetUIFloat "StartMenu/MCM/_Value"
+		
+		if GetUIFloat "StartMenu/MCM/_Reset"			;1 - RESET
+			SetUIFloat "StartMenu/MCM/_Reset" 0
+
+			let vUpdatedINI := 1
+
+			SetUIFloat "StartMenu/MCM/*:1/_columns" 2
+
+			SetUIFloat "StartMenu/MCM/*:1/*:1/_enable" 1
+			SetUIString "StartMenu/MCM/*:1/*:1/_title" $ScVerticalMult
+			SetUIFloat "StartMenu/MCM/*:1/*:1/_type" 2.5
+			SetUIStringEx "StartMenu/MCM/*:1/*:1/value/*:1/string" "%.2f" cVerticalMult
+			
+			SetUIFloat "StartMenu/MCM/*:1/*:2/_enable" 1
+			SetUIString "StartMenu/MCM/*:1/*:2/_title" $ScHorizontalMult
+			SetUIFloat "StartMenu/MCM/*:1/*:2/_type" 2.5
+			SetUIStringEx "StartMenu/MCM/*:1/*:2/value/*:1/string" "%.2f" cHorizontalMult
+			
+			SetUIFloat "StartMenu/MCM/*:1/*:3/_enable" 1
+			SetUIString "StartMenu/MCM/*:1/*:3/_title" $ScXlimitsMult
+			SetUIFloat "StartMenu/MCM/*:1/*:3/_type" 2.5
+			SetUIStringEx "StartMenu/MCM/*:1/*:3/value/*:1/string" "%.2f" cXlimitsMult
+			
+			SetUIFloat "StartMenu/MCM/*:1/*:4/_enable" 1
+			SetUIString "StartMenu/MCM/*:1/*:4/_title" $ScYlimitsMult
+			SetUIFloat "StartMenu/MCM/*:1/*:4/_type" 2.5
+			SetUIStringEx "StartMenu/MCM/*:1/*:4/value/*:1/string" "%.2f" cYlimitsMult
+
+			SetUIFloat "StartMenu/MCM/*:1/*:5/_enable" 1
+			SetUIString "StartMenu/MCM/*:1/*:5/_title" $ScShouldReturn
+			SetUIFloat "StartMenu/MCM/*:1/*:5/_type" 4
+			SetUIFloat "StartMenu/MCM/*:1/*:5/_value" cShouldReturn
+			
+			SetUIFloat "StartMenu/MCM/*:1/*:7/_enable" 1
+			SetUIString "StartMenu/MCM/*:1/*:7/_title" $ScVerticalIronsightMult
+			SetUIFloat "StartMenu/MCM/*:1/*:7/_type" 2.5
+			SetUIStringEx "StartMenu/MCM/*:1/*:7/value/*:1/string" "%.2f" cVerticalIronsightMult
+			
+			SetUIFloat "StartMenu/MCM/*:1/*:8/_enable" 1
+			SetUIString "StartMenu/MCM/*:1/*:8/_title" $ScHorizontalIronsightMult
+			SetUIFloat "StartMenu/MCM/*:1/*:8/_type" 2.5
+			SetUIStringEx "StartMenu/MCM/*:1/*:8/value/*:1/string" "%.0f" cHorizontalIronsightMult
+			
+			SetUIFloat "StartMenu/MCM/*:1/*:9/_enable" 1
+			SetUIString "StartMenu/MCM/*:1/*:9/_title" $ScIsRandomized
+			SetUIFloat "StartMenu/MCM/*:1/*:9/_type" 4
+			SetUIFloat "StartMenu/MCM/*:1/*:9/_value" cIsRandomized
+			
+			SetUIFloat "StartMenu/MCM/*:1/*:11/_enable" 1
+			SetUIString "StartMenu/MCM/*:1/*:11/_title" $ScDebug
+			SetUIFloat "StartMenu/MCM/*:1/*:11/_type" 4
+			SetUIFloat "StartMenu/MCM/*:1/*:11/_value" cDebug
+
+			SetUIFloat "StartMenu/MCM/*:1/*:13/_enable" 1
+			SetUIString "StartMenu/MCM/*:1/*:13/_title" $SvLoadPreset
+			SetUIFloat "StartMenu/MCM/*:1/*:13/_type" 6
+			SetUIStringEx "StartMenu/MCM/*:1/*:13/_textoff" $PresetName
+			SetUIFloat "StartMenu/MCM/*:1/*:13/_indent" 2
+
+			SetUIFloat "StartMenu/MCM/*:1/*:14/_enable" 1
+			SetUIString "StartMenu/MCM/*:1/*:14/_title" $SvSavePreset
+			SetUIStringEx "StartMenu/MCM/*:1/*:14/_textoff" " "
+			SetUIFloat "StartMenu/MCM/*:1/*:14/_type" 6
+			SetUIFloat "StartMenu/MCM/*:1/*:14/_indent" 1
+			
+		elseif GetUIFloat "StartMenu/MCM/_Default"		;2 - DEFAULT
+			SetUIFloat "StartMenu/MCM/_Default" 0
+			SetUIFloat "StartMenu/MCM/_Reset" 1
+			
+			set cVerticalMult to GetINIFloat "General:cVerticalMult" "ProfilesCRecoil\Default.ini"
+			set cHorizontalMult to GetINIFloat "General:cHorizontalMult" "ProfilesCRecoil\Default.ini"
+			set cXlimitsMult to GetINIFloat "General:cXlimitsMult" "ProfilesCRecoil\Default.ini"
+			set cYlimitsMult to GetINIFloat "General:cYlimitsMult" "ProfilesCRecoil\Default.ini"
+			set cShouldReturn to GetINIFloat "General:cShouldReturn" "ProfilesCRecoil\Default.ini"
+			set cVerticalIronsightMult to GetINIFloat "Ironsights:cVerticalIronsightMult" "ProfilesCRecoil\Default.ini"
+			set cHorizontalIronsightMult to GetINIFloat "Ironsights:cHorizontalIronsightMult" "ProfilesCRecoil\Default.ini"
+			set cIsRandomized to GetINIFloat "Randomization:cIsRandomized" "ProfilesCRecoil\Default.ini"
+			set cDebug to GetINIFloat "BUGFIXING:cDebug" "ProfilesCRecoil\Default.ini"
+		
+		elseif GetUIFloat "StartMenu/MCM/_NewValue"		;3 - NEW VALUE
+			SetUIFloat "StartMenu/MCM/_NewValue" 0
+			SetUIFloat "StartMenu/MCM/_Reset" 1
+			
+			if OptionID == 1
+				set cVerticalMult to OptionValue
+			elseif OptionID == 2
+				set cHorizontalMult to OptionValue
+			elseif OptionID == 3
+				set cXlimitsMult to OptionValue
+			elseif OptionID == 4
+				set cYlimitsMult to OptionValue
+			elseif OptionID == 7
+				set cVerticalIronsightMult to OptionValue
+			elseif OptionID == 8
+				set cHorizontalIronsightMult to OptionValue	
+			elseif OptionID == 13
+				let PresetsList := GetFilesInFolder $CustomPath
+				let PresetsButtons := ""
+				foreach PresetVal <- PresetsList
+					let PresetsButtons += "|"+$*PresetVal
+				loop
+				MessageBoxExAlt cPresetButton $PresetsButtons
+			elseif OptionID == 14
+				ShowTextInputMenu cPresetButtonSave 400 200 $vSavePresetQ
+			endif
+			
+		elseif GetUIFloat "StartMenu/MCM/_ShowList" == 1		;4 - SHOW LIST
+			SetUIFloat "StartMenu/MCM/_ShowList" 2
+
+		elseif GetUIFloat "StartMenu/MCM/_ShowScale" == 1		;5 - SHOW SCALE
+			SetUIFloat "StartMenu/MCM/_ShowScale" 2	
+			
+			if OptionID == 1
+				SetUIFloat "StartMenu/MCM/_Value" cVerticalMult
+				SetUIFloat "StartMenu/MCM/_ValueDecimal" 2
+				SetUIFloat "StartMenu/MCM/_ValueIncrement" 0.01
+				SetUIFloat "StartMenu/MCM/_ValueMax" 15
+				SetUIFloat "StartMenu/MCM/_ValueMin" 0
+				SetUIString "StartMenu/MCM/*:2/_title" $ScVerticalMult
+			elseif OptionID == 2
+				SetUIFloat "StartMenu/MCM/_Value" cHorizontalMult
+				SetUIFloat "StartMenu/MCM/_ValueDecimal" 2
+				SetUIFloat "StartMenu/MCM/_ValueIncrement" 0.01
+				SetUIFloat "StartMenu/MCM/_ValueMax" 15
+				SetUIFloat "StartMenu/MCM/_ValueMin" 0
+				SetUIString "StartMenu/MCM/*:2/_title" $ScHorizontalMult
+			elseif OptionID == 3
+				SetUIFloat "StartMenu/MCM/_Value" cXlimitsMult
+				SetUIFloat "StartMenu/MCM/_ValueDecimal" 2
+				SetUIFloat "StartMenu/MCM/_ValueIncrement" 0.01
+				SetUIFloat "StartMenu/MCM/_ValueMax" 5
+				SetUIFloat "StartMenu/MCM/_ValueMin" 0
+				SetUIString "StartMenu/MCM/*:2/_title" $ScXlimitsMult
+			elseif OptionID == 4
+				SetUIFloat "StartMenu/MCM/_Value" cYlimitsMult
+				SetUIFloat "StartMenu/MCM/_ValueDecimal" 2
+				SetUIFloat "StartMenu/MCM/_ValueIncrement" 0.01
+				SetUIFloat "StartMenu/MCM/_ValueMax" 5
+				SetUIFloat "StartMenu/MCM/_ValueMin" 0
+				SetUIString "StartMenu/MCM/*:2/_title" $ScYlimitsMult
+			elseif OptionID == 7
+				SetUIFloat "StartMenu/MCM/_Value" cVerticalIronsightMult
+				SetUIFloat "StartMenu/MCM/_ValueDecimal" 2
+				SetUIFloat "StartMenu/MCM/_ValueIncrement" 0.01
+				SetUIFloat "StartMenu/MCM/_ValueMax" 5
+				SetUIFloat "StartMenu/MCM/_ValueMin" 0
+				SetUIString "StartMenu/MCM/*:2/_title" $ScVerticalIronsightMult
+			elseif OptionID == 8
+				SetUIFloat "StartMenu/MCM/_Value" cHorizontalIronsightMult
+				SetUIFloat "StartMenu/MCM/_ValueDecimal" 2
+				SetUIFloat "StartMenu/MCM/_ValueIncrement" 0.01
+				SetUIFloat "StartMenu/MCM/_ValueMax" 5
+				SetUIFloat "StartMenu/MCM/_ValueMin" 0
+				SetUIString "StartMenu/MCM/*:2/_title" $ScHorizontalIronsightMult
+			endif
+		elseif GetUIFloat "StartMenu/MCM/_DefaultScale"		;6 - DEFAULT SCALE
+			SetUIFloat "StartMenu/MCM/_DefaultScale" 0
+			SetUIFloat "StartMenu/MCM/_ShowScale" 2
+			
+			if OptionID == 1
+				SetUIFloat "StartMenu/MCM/_Value" cVerticalMultD
+			elseif OptionID == 2
+				SetUIFloat "StartMenu/MCM/_Value" cHorizontalMultD
+			elseif OptionID == 3
+				SetUIFloat "StartMenu/MCM/_Value" cXlimitsMultD
+			elseif OptionID == 4
+				SetUIFloat "StartMenu/MCM/_Value" cYlimitsMultD
+			elseif OptionID == 7
+				SetUIFloat "StartMenu/MCM/_Value" cVerticalIronsightMultD
+			elseif OptionID == 8
+				SetUIFloat "StartMenu/MCM/_Value" cHorizontalIronsightMultD 
+			endif
+			
+		endif
+		
+		if IsHover != GetUIFloat "StartMenu/MCM/*:1/_optionID"		;7 - MOUSE-OVER
+			set IsHover to GetUIFloat "StartMenu/MCM/*:1/_optionID"
+			if IsHover
+				SetUIFloat "StartMenu/MCM/MCM_Info/visible" 1
+
+				if IsHover == 1
+					SetUIString "StartMenu/MCM/*:9/string" $cVerticalMultQ
+				elseif IsHover == 2
+					SetUIString "StartMenu/MCM/*:9/string" $cHorizontalMultQ
+				elseif IsHover == 3
+					SetUIString "StartMenu/MCM/*:9/string" $cXlimitsMultQ
+				elseif IsHover == 4
+					SetUIString "StartMenu/MCM/*:9/string" $cYlimitsMultQ
+				elseif IsHover == 5
+					SetUIString "StartMenu/MCM/*:9/string" $cShouldReturnQ
+				elseif IsHover == 7
+					SetUIString "StartMenu/MCM/*:9/string" $cVerticalIronsightMultQ
+				elseif IsHover == 8
+					SetUIString "StartMenu/MCM/*:9/string" $cHorizontalIronsightMultQ
+				elseif IsHover == 9
+					SetUIString "StartMenu/MCM/*:9/string" $cIsRandomizedQ
+				elseif IsHover == 11
+					SetUIString "StartMenu/MCM/*:9/string" $cDebugQ
+				elseif IsHover == 13
+					SetUIString "StartMenu/MCM/*:9/string" $vLoadPresetQ
+				elseif IsHover == 14
+					SetUIString "StartMenu/MCM/*:9/string" $vSavePresetQ
+				else
+					SetUIFloat "StartMenu/MCM/MCM_Info/visible" 0
+				endif
+			else
+				SetUIFloat "StartMenu/MCM/MCM_Info/visible" 0
+			endif
+		endif
+		
+	endif
+end

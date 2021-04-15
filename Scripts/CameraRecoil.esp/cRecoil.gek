@@ -1,0 +1,177 @@
+scn cRecoil
+
+float panglex
+float panglez
+float panglexr
+float panglezr
+
+float recanglex
+float recanglez
+
+float retanglex
+float retanglez
+
+float drecx
+float drecz
+
+float time
+
+float timer
+
+float timex
+float timez
+
+float degtime
+float degfloor
+
+float dangle
+
+float inc
+float inctime
+
+
+float anglexx
+float anglezz
+
+float VMx
+float VMy
+float VMz
+
+
+float Rot0
+float Rot1
+float Rot2
+
+array_var DefRot
+array_var DefTrans
+array_var DefRotIS
+
+int ShouldReturn
+
+begin gamemode
+
+	if getgameloaded && getgamerestarted
+
+		let inc := 1
+		
+		SetOnFireWeaponEventHandler Cweapon 1 player
+	endif
+
+	if player.getdead || player.getisragdolled || timer > 0
+		if timer > 0
+			let timer -= getsecondspassed
+		endif
+	else
+	
+		if recanglex > 0.001 && timex > 0.001
+			
+			if (player.getangle x) > panglex
+				let dangle := (player.getangle x) - panglex
+				let retanglex -= dangle
+			endif
+
+
+			if (player.getangle x) < -50
+				let drecx := 0
+				let recanglex := 0
+			else
+				let drecx := ((2*recanglex)/timex) * getsecondspassed
+				if drecx < 0
+					let drecx := 0
+					let recanglex := 0
+				endif
+			endif
+			if drecx > recanglex
+				let drecx := recanglex
+			endif
+			let recanglex -= drecx
+			let retanglex += drecx
+			let timex -= getsecondspassed
+			let panglex := (player.getangle x) - drecx
+			player.setangle x panglex
+			
+			
+
+			;let degtime := 0.4
+
+		else
+			if retanglex > 0.001 && ShouldReturn ;&& (player.getangle x) < (degfloor + 4)
+
+				let drecx := 2.6 * retanglex * getsecondspassed
+				if drecx > retanglex
+					let drecx := retanglex
+				endif
+				let retanglex -= 1 * drecx
+				let panglexr := (player.getangle x) + drecx
+				player.setangle x panglexr
+				
+		
+
+				;let degtime := 0.4
+			else
+				let retanglex := 0
+				;if degtime > 0
+				;	let degtime -= getsecondspassed
+				;else
+				;	let degfloor := player.getangle x
+				;endif
+				
+				
+				
+			endif
+
+			let panglex := player.getangle x
+
+			if inctime > 0
+				let inctime -= getsecondspassed
+			else
+				let inc := 1
+			endif
+
+			let recanglex := 0
+			let timex := 0
+
+
+		endif
+
+
+	
+		if (recanglez*recanglez) > 0.0001 && timez > 0.001
+			let drecz := ((2*recanglez)/timez) * getsecondspassed
+			if (drecz*drecz) > (recanglez*recanglez)
+				let drecz := recanglez
+			endif
+			
+			let recanglez -= drecz
+			let retanglez += drecz
+			let timez -= getsecondspassed
+			let panglez := (player.getangle z) - drecz
+
+			player.setangle z panglez
+		else
+
+			if (retanglez*retanglez) > 0.001 && ShouldReturn
+				let drecz := 2.6 * retanglez * getsecondspassed
+				if (drecz*drecz) > (retanglez*retanglez)
+					let drecz := retanglez
+				endif
+				let retanglez -= 1 * drecz
+				let panglezr := (player.getangle z) + drecz
+				player.setangle z panglezr
+
+			else
+				let retanglez := 0
+				
+				
+			endif
+
+			let recanglez := 0
+			let timez := 0
+
+		endif
+		
+
+	endif
+
+	
+end

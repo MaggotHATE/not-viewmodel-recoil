@@ -1,0 +1,30 @@
+scn	cPresetButtonSave
+
+string_var vSetName
+string_var PresetPath
+
+
+begin Function {vSetName}
+
+	
+	
+	if eval vSetName != " "
+		
+		let PresetPath := "ProfilesCRecoil\Custom\"+$vSetName
+		Print "Saving " + $vSetName + " into " + $PresetPath + ".ini... "
+		;Print "vSetName Name=" + $PresetPath
+
+		SetINIFloat "General:cVerticalMult" ActuaModellRecoilQuestMCM.cVerticalMult $PresetPath
+		SetINIFloat "General:cHorizontalMult" ActuaModellRecoilQuestMCM.cHorizontalMult $PresetPath
+		SetINIFloat "General:cXlimitsMult" ActuaModellRecoilQuestMCM.cXlimitsMult $PresetPath
+		SetINIFloat "General:cYlimitsMult" ActuaModellRecoilQuestMCM.cYlimitsMult $PresetPath
+		SetINIFloat "General:cShouldReturn" ActuaModellRecoilQuestMCM.cShouldReturn $PresetPath
+		SetINIFloat "Ironsights:cVerticalIronsightMult" ActuaModellRecoilQuestMCM.cVerticalIronsightMult $PresetPath
+		SetINIFloat "Ironsights:cHorizontalIronsightMult" ActuaModellRecoilQuestMCM.cHorizontalIronsightMult $PresetPath
+		SetINIFloat "Randomization:cIsRandomized" ActuaModellRecoilQuestMCM.cIsRandomized $PresetPath
+		SetINIFloat "BUGFIXING:cDebug" ActuaModellRecoilQuestMCM.cDebug $PresetPath
+
+	endif
+	
+	sv_Destruct vSetName
+end

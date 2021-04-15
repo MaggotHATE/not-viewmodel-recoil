@@ -1,0 +1,37 @@
+scn	cPresetButton
+
+int	vButton
+string_var PresetPath
+
+
+begin Function {vButton}
+
+	;Print "vButton=" + $vButton
+	Print "Loading " + $ActuaModellRecoilQuestMCM.PresetsList[vButton] + "..."
+	let ActuaModellRecoilQuestMCM.PresetName := ActuaModellRecoilQuestMCM.PresetsList[vButton]
+	
+	let PresetPath := "ProfilesCRecoil\Custom\"+$ActuaModellRecoilQuestMCM.PresetName
+	let ActuaModellRecoilQuestMCM.PresetPath := PresetPath
+	
+	set ActuaModellRecoilQuestMCM.cHorizontalMult to GetINIFloat "General:cHorizontalMult" $PresetPath
+	set ActuaModellRecoilQuestMCM.cXlimitsMult to GetINIFloat "General:cXlimitsMult" $PresetPath
+	set ActuaModellRecoilQuestMCM.cYlimitsMult to GetINIFloat "General:cYlimitsMult" $PresetPath
+	set ActuaModellRecoilQuestMCM.cShouldReturn to GetINIFloat "General:cShouldReturn" $PresetPath
+	set ActuaModellRecoilQuestMCM.cVerticalIronsightMult to GetINIFloat "Ironsights:cVerticalIronsightMult" $PresetPath
+	set ActuaModellRecoilQuestMCM.cHorizontalIronsightMult to GetINIFloat "Ironsights:cHorizontalIronsightMult" $PresetPath
+	set ActuaModellRecoilQuestMCM.cIsRandomized to GetINIFloat "Randomization:cIsRandomized" $PresetPath
+	set ActuaModellRecoilQuestMCM.cDebug to GetINIFloat "BUGFIXING:cDebug" $PresetPath
+		
+	SetINIFloat "General:cVerticalMult" ActuaModellRecoilQuestMCM.cVerticalMult "C_Recoil.ini"
+	SetINIFloat "General:cHorizontalMult" ActuaModellRecoilQuestMCM.cHorizontalMult "C_Recoil.ini"
+	SetINIFloat "General:cXlimitsMult" ActuaModellRecoilQuestMCM.cXlimitsMult "C_Recoil.ini"
+	SetINIFloat "General:cYlimitsMult" ActuaModellRecoilQuestMCM.cYlimitsMult "C_Recoil.ini"
+	SetINIFloat "General:cShouldReturn" ActuaModellRecoilQuestMCM.cShouldReturn "C_Recoil.ini"
+	SetINIFloat "Ironsights:cVerticalIronsightMult" ActuaModellRecoilQuestMCM.cVerticalIronsightMult "C_Recoil.ini"
+	SetINIFloat "Ironsights:cHorizontalIronsightMult" ActuaModellRecoilQuestMCM.cHorizontalIronsightMult "C_Recoil.ini"
+	SetINIFloat "Randomization:cIsRandomized" ActuaModellRecoilQuestMCM.cIsRandomized "C_Recoil.ini"
+	SetINIFloat "BUGFIXING:cDebug" ActuaModellRecoilQuestMCM.cDebug "C_Recoil.ini"
+
+	SetUIFloat "StartMenu/MCM/_Reset" 1
+	
+end
