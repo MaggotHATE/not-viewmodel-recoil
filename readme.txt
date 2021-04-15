@@ -16,6 +16,7 @@ NV Compatibility Skeleton
 
 ::RECOMMENDED MODS::
 - B42 Weapon Inertia https://www.nexusmods.com/newvegas/mods/64335
+- Deus Ex Weapon Spread https://www.nexusmods.com/newvegas/mods/55739
 - (shameless plug!)Viewmodel recoil https://www.nexusmods.com/newvegas/mods/71852
 
 
