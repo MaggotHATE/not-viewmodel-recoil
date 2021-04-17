@@ -274,10 +274,16 @@ Begin MenuMode 1013 ;an attempt to fix VATS-related bug, couldn't reproduce it t
 				set cXlimitsMult to OptionValue
 			elseif OptionID == 4
 				set cYlimitsMult to OptionValue
+			elseif OptionID == 5
+				set cShouldReturn to OptionValue	
 			elseif OptionID == 7
 				set cVerticalIronsightMult to OptionValue
 			elseif OptionID == 8
 				set cHorizontalIronsightMult to OptionValue	
+			elseif OptionID == 9
+				set cIsRandomized to OptionValue	
+			elseif OptionID == 11
+				set cDebug to OptionValue	
 			elseif OptionID == 13
 				let PresetsList := GetFilesInFolder $CustomPath
 				let PresetsButtons := ""
