@@ -13,6 +13,7 @@ begin Function {vButton}
 	let PresetPath := "ProfilesCRecoil\Custom\"+$ActuaModellRecoilQuestMCM.PresetName
 	let ActuaModellRecoilQuestMCM.PresetPath := PresetPath
 	
+	set ActuaModellRecoilQuestMCM.cVerticalMult to GetINIFloat "General:cVerticalMult" $PresetPath
 	set ActuaModellRecoilQuestMCM.cHorizontalMult to GetINIFloat "General:cHorizontalMult" $PresetPath
 	set ActuaModellRecoilQuestMCM.cXlimitsMult to GetINIFloat "General:cXlimitsMult" $PresetPath
 	set ActuaModellRecoilQuestMCM.cYlimitsMult to GetINIFloat "General:cYlimitsMult" $PresetPath
