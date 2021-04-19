@@ -30,6 +30,9 @@ float randn
 float cIsRand
 float cConst
 
+int HasInertia
+float InertiaC
+
 int ShouldReturn
 
 begin Function {rC_Weapon}
@@ -50,8 +53,8 @@ begin Function {rC_Weapon}
 	let cXlimitsMult := GetINIFloat "General:cXlimitsMult" "C_Recoil.ini"
 	let cYlimitsMult := GetINIFloat "General:cYlimitsMult" "C_Recoil.ini"
 	
-	let cX := VisuaModellRecoilQuest.DefA1 ;GetVariable "DefY", VMweapon
-	let cY := VisuaModellRecoilQuest.DefA0 ;GetVariable "DefX", VMweapon
+	let cX := VisuaModellRecoilQuest.DefA1C ;GetVariable "DefY", VMweapon
+	let cY := VisuaModellRecoilQuest.DefA0C ;GetVariable "DefX", VMweapon
 	;let cZ := VisuaModellRecoilQuest.DefA2 ;GetVariable "DefX", VMweapon
 	; print "cX="+$cX
 	; print "cY="+$cY
@@ -125,8 +128,8 @@ begin Function {rC_Weapon}
 		let cX := cXmax
 	endif
 	
-	; print "cX 2 "+$cX
-	; print "cY 2 "+$cY
+	;print "cX 2 "+$cX
+	;print "cY 2 "+$cY
 	
 	let cIsRand := GetINIFloat "Randomization:cIsRandomized" "C_Recoil.ini"
 	if cIsRand == 1
