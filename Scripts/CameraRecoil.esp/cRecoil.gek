@@ -50,11 +50,10 @@ int ShouldReturn
 
 begin gamemode
 
-	if getgameloaded && getgamerestarted
+	if getgameloaded
 
 		let inc := 1
-		
-		SetOnFireWeaponEventHandler Cweapon 1 player
+
 	endif
 
 	if player.getdead || player.getisragdolled || timer > 0

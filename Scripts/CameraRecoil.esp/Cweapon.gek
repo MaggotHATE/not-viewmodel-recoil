@@ -35,7 +35,7 @@ float InertiaC
 
 int ShouldReturn
 
-begin Function {rC_Weapon}
+begin Function {rC_Weapon cX cY cZ}
 
 	; let VMR := GetModIndex "VM_recoil.esp"
 	; let VMweapon := BuildRef VMR 2050
@@ -43,21 +43,22 @@ begin Function {rC_Weapon}
 	; let cX := GetVariable "DefX" VMweapon 
 	; I still have no idea how Get|SetVariable work, commented for now
 	
-	;print "DefX = "+$cX
-	
 	let cConst := 2 - GetWeaponIsAutomatic rC_Weapon
 	
 	let cXmult := GetINIFloat "General:cVerticalMult" "C_Recoil.ini"
 	let cYmult := GetINIFloat "General:cHorizontalMult" "C_Recoil.ini"
 	
+	
 	let cXlimitsMult := GetINIFloat "General:cXlimitsMult" "C_Recoil.ini"
 	let cYlimitsMult := GetINIFloat "General:cYlimitsMult" "C_Recoil.ini"
 	
-	let cX := VisuaModellRecoilQuest.DefA1C ;GetVariable "DefY", VMweapon
-	let cY := VisuaModellRecoilQuest.DefA0C ;GetVariable "DefX", VMweapon
+	
+	;let cX := VisuaModellRecoilQuest.DefA1C ;GetVariable "DefY", VMweapon
+	;let cY := VisuaModellRecoilQuest.DefA0C ;GetVariable "DefX", VMweapon
 	;let cZ := VisuaModellRecoilQuest.DefA2 ;GetVariable "DefX", VMweapon
-	; print "cX="+$cX
-	; print "cY="+$cY
+	
+	;print "cX 0="+$cX
+	;print "cY 0="+$cY
 	
 	if cX != 0 && cY != 0
 		let ActualModellRecoilQuest.inc += 0.05
@@ -184,5 +185,4 @@ begin Function {rC_Weapon}
 		endif
 	endif
 	let ActualModellRecoilQuest.timez := 0.09
-
 end

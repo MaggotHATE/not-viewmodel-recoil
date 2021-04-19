@@ -1,0 +1,8 @@
+scn cHandle
+
+ref chWeapon
+
+
+Begin Function {chWeapon}
+	Call Cweapon chWeapon
+end
